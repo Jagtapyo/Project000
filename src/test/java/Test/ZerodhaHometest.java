@@ -9,8 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -21,6 +23,7 @@ import Pom.ZerodhaLoginpage;
 import Utility.Parameterization;
 import Utility.Screenshot;
 
+@Listeners(Listenerss.class)
 public class ZerodhaHometest {
 	WebDriver driver;
 	@BeforeMethod
@@ -28,7 +31,12 @@ public class ZerodhaHometest {
 	{
 		driver=Browser1.openbrowser();
 	}
-@Test
+	@AfterMethod()
+	public void screenshotsss1() throws IOException
+	{
+		Screenshot.getscreenshot(driver, "logintest");
+	}
+@Test(priority=1)
 public void loginn() throws EncryptedDocumentException, IOException, InterruptedException
 {
 	ZerodhaLoginpage zerodhaloginpage = new ZerodhaLoginpage(driver);
@@ -52,8 +60,23 @@ public void loginn() throws EncryptedDocumentException, IOException, Interrupted
 	String pin03=Parameterization.getData(2, 1);
 	pinpageobj.enterpin(pin03, driver);
 	pinpageobj.clicksubmit();
+	softassert.assertAll();
 	
-
+}
+	@Test(priority=2)
+	public void hometest() throws EncryptedDocumentException, IOException
+	{
+	ZerodhaLoginpage zerodhaloginpage = new ZerodhaLoginpage(driver);
+	String user2=Parameterization.getData(0, 1);
+	zerodhaloginpage.enteruserid(user2);
+	String pass2 =Parameterization.getData(1, 1);
+	zerodhaloginpage.enterpass(pass2);
+	zerodhaloginpage.clickonlogin();
+	
+	PinPage pinpageobj= new PinPage(driver);
+	String pin03=Parameterization.getData(2, 1);
+	pinpageobj.enterpin(pin03, driver);
+	pinpageobj.clicksubmit();
 	Buysellzerodha buysellobj=new Buysellzerodha(driver);
 //	Actions obj3=new Actions(driver);
 //	WebElement radio1= driver.findElement(By.xpath("//input[@type='text']"));//can do directly by using click() on the element widout mouse actions
@@ -66,7 +89,7 @@ public void loginn() throws EncryptedDocumentException, IOException, Interrupted
 
 
 	buysellobj.purchase(driver);
-	Screenshot.getscreenshot(driver,"buy");
+	
 	
 	buysellobj.hitbuy(driver);//explicit wait
 	
@@ -77,12 +100,14 @@ public void loginn() throws EncryptedDocumentException, IOException, Interrupted
 	
 
 	buysellobj.vend(driver);
-	Screenshot.getscreenshot(driver, "sell");
+	
 	buysellobj.hitsell(driver);
 	buysellobj.sellcancel(driver);
-	softassert.assertAll();
-}
-	@AfterMethod
+	
+	}
+
+
+	@AfterClass()
 	public void closewindow() throws InterruptedException
 	{
 		Thread.sleep(3000);

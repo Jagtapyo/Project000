@@ -30,7 +30,7 @@ public class ZerodhaLoginpagetest {
 	{
 		driver=Browser1.openbrowser();
 	}
-	@Test
+	@Test(priority=1)
 	public void loginwithvalidcredentials() throws EncryptedDocumentException, IOException, InterruptedException
 	{
 		ZerodhaLoginpage zerodhaloginpage= new ZerodhaLoginpage(driver);
@@ -46,7 +46,7 @@ public class ZerodhaLoginpagetest {
 			p9.enterpin(p8, driver);
 			p9.clicksubmit();
 			}
-	@Test
+	@Test(priority=2)
 	public void forgotpass() throws InterruptedException, EncryptedDocumentException, IOException
 	{
 		ZerodhaLoginpage zerodhaloginpage= new ZerodhaLoginpage(driver);
@@ -67,7 +67,7 @@ public class ZerodhaLoginpagetest {
 		obj.perform();
 		
 	}
-	@Test
+	@Test(priority=3)
 	public void signupp() throws EncryptedDocumentException, IOException, InterruptedException
 	{
 		ZerodhaLoginpage zerodhaloginpage= new ZerodhaLoginpage(driver);
@@ -85,12 +85,12 @@ public class ZerodhaLoginpagetest {
 	signupzero.done();
 	
 	}
-//	@AfterMethod
-//	public void closee() throws InterruptedException
-//	{
-//		Thread.sleep(5000);
-//		driver.quit();
-//	}
+	@AfterMethod
+	public void closee() throws InterruptedException
+	{
+		Thread.sleep(5000);
+		driver.quit();
+	}
 	}
 	
 	

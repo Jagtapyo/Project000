@@ -6,8 +6,9 @@
       <class name="Test.ZerodhaHometest">
         <methods>
           <include name="closewindow"/>
-          <include name="loginn"/>
+          <include name="hometest"/>
           <include name="open"/>
+          <include name="screenshotsss1"/>
         </methods>
       </class> <!-- Test.ZerodhaHometest -->
     </classes>

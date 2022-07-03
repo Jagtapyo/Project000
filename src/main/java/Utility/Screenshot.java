@@ -17,7 +17,7 @@ public class Screenshot {
 		 	LocalDateTime currenttime= LocalDateTime.now();
 		 	String d= dft.format(currenttime);
 			File source= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-			File Destination= new File("F:\\Yoclasssjava\\screen\\" +d + name +".jpeg");
+			File Destination= new File("F:\\Yoclasssjava\\maven1\\screenshots\\" +d + name +".jpeg");
 			FileHandler.copy(source, Destination);
 			return d;
 
